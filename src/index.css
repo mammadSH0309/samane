@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  @font-face {
+      font-family: 'sahel';
+      src:url(./fonts/Sahel.ttf) format('truetype'); 
+      
+  }
+  @font-face {
+      font-family: 'sahelBold';
+      src:url(./fonts/Sahel-Bold.ttf) format('truetype'); 
+      
+  }
+  @font-face {
+    font-family: 'khameneiiRegular';
+    src:url(./fonts/KHAMENEIIRREGULAR.TTF) format('truetype'); 
+    
+  }
+  @font-face {
+  font-family: 'khameneiiBlack';
+  src:url(./fonts/KHAMENEIIRBLACK.TTF) format('truetype'); 
+  
+  }
+  @font-face {
+    font-family: 'khameneiiBold';
+    src:url(./fonts/KHAMENEIIRBOLD.TTF) format('truetype'); 
+    
+    }
+  
+
+}
+
+:where(.css-dev-only-do-not-override-7py20b).ant-card .ant-card-body {
+  padding: 5px;
+ 
+}
+::-webkit-scrollbar {
+  width: 10px;
+  display: none; 
+}
+
+
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
