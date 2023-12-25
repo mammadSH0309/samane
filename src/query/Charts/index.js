@@ -1,20 +1,40 @@
 import {createApi , fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
-const URL = 'http://192.168.200.40:8000/'
-export const chartsApi = createApi({
-    reducerPath : 'chartsApi',
+const URL = 'http://192.168.200.100:8000//'
+
+
+export const rasadNegarApi = createApi({
+    reducerPath : 'rasadNegar' , 
+    baseQuery : fetchBaseQuery({baseUrl : `${URL}rasadnegar/`}),
+    endpoints : (builder) =>({
+        getRasadNama : builder.query({
+            query : ()=> 'get/rasadnama'
+        }),
+        getMehvarNama : builder.query({
+            query : ()=> ' get/mehvarnama'
+        }),
+        getBasteNama : builder.query({
+            query : ()=> 'get/bastenama'
+        }),
+        getFakeNews : builder.query({
+            query : ()=> 'get/fakenews'
+        })
+    })
+})
+export const chartsTwitterApi = createApi({
+    reducerPath : 'chartsTwitter',
     baseQuery : fetchBaseQuery({baseUrl : `${URL}twitter/`}),
     endpoints : (builder) =>({
-        getChartsDay : builder.query({
+        getChartsDayTwitter : builder.query({
             query : () => 'filtercurrentdaytwittertrends/get/'
         }),                           
-        getChartsMonth : builder.query({
+        getChartsMonthTwitter : builder.query({
             query : () => 'filtercurrentmonthtwittertrends/get/'
         }), 
-        getChartsYear : builder.query({
+        getChartsYearTwitter : builder.query({
             query : () => 'filtercurrentmonthtwittertrends/get/'
         }), 
-        getChartsWithParams : builder.query({
+        getChartsTwitterWithParams : builder.query({
           query : ({year,
                     start_month,
                     end_month,
@@ -26,7 +46,30 @@ export const chartsApi = createApi({
         
        
     }),
+       
         
+})
+
+export const chartsTelegramApi = createApi({
+    reducerPath : 'ChartsTelegram',
+    baseQuery : fetchBaseQuery({baseUrl : `${URL}telegram/`}),
+    endpoints : (builder) =>({
+        getEhsasTelegramNews : builder.query({
+            query : ()=> 'ehsastelegramnewsperday/get/'
+        }),
+        getEhsasTelegramNewsPerMonth : builder.query({
+            query : ()=> 'ehsastelegramnewspermonth/get/'
+        }),
+        getEhsasTelegramNewsPerYear : builder.query({
+            query : ()=> 'ehsastelegramnewsperyear/get/'
+        }), 
+        getEhsasTelegramNewsHeatMap : builder.query({
+            query : ()=> 'ehsastelegramnewsheatmap/get/'
+        }),
+        getEhsasTelegramNewsParallel: builder.query({
+            query : ()=> 'ehsastelegramnewsparallelcoordinates/get/'
+        })
+    })
 })
 
 export const accountApi = createApi({
@@ -45,6 +88,7 @@ export const accountApi = createApi({
     })
 })
 
-
+export const { useGetRasadNamaQuery , useGetBasteNamaQuery , useGetMehvarNamaQuery , useGetFakeNewsQuery} = rasadNegarApi
 export const {useLoginUserMutation} = accountApi
-export const {useGetChartsDayQuery,useGetChartsMonthQuery ,useGetChartsYearQuery, useGetChartsWithParamsQuery , useGetChartsByDayQuery} = chartsApi
+export const {useGetChartsDayTwitterQuery,useGetChartsMonthTwitterQuery ,useGetChartsYearTwitterQuery, useGetChartsTwitterWithParamsQuery } = chartsTwitterApi
+export const {useGetEhsasTelegramNewsQuery , useGetEhsasTelegramNewsPerMonthQuery , useGetEhsasTelegramNewsPerYearQuery , useGetEhsasTelegramNewsHeatMapQuery , useGetEhsasTelegramNewsParallelQuery} = chartsTelegramApi

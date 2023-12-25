@@ -3,12 +3,14 @@ import IconMenu from './IconMenu'
 import {Link} from 'react-router-dom'
 import { IoHelpCircleOutline } from "react-icons/io5";
 import { MdLocalPhone } from "react-icons/md";
+import { MdOutlineMenu } from "react-icons/md";
 import { Tooltip } from 'antd';
 
-function HeaderItem() {
+function HeaderItem({collapsed , setCollapsed}) {
   return (
     <div className='flex flex-row h-full justify-between align-middle items-center'>
-      <div className='flex flex-row gap-5'>
+      <div className='flex flex-row gap-5 p-4'>
+        <MdOutlineMenu  style={{fontSize : 20 }} onClick={()=> setCollapsed(!collapsed)}  />
         <Link to={'/help'}>
           <Tooltip>
             <IoHelpCircleOutline style={{fontSize : 20 }}/>

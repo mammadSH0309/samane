@@ -5,6 +5,11 @@ import DashboardPage from "../pages/DashboardPage";
 import NotFound from "../components/NotFound";
 import TwiiterPage from "../pages/TwiiterPage";
 import TelegramPage from "../pages/TelegramPage";
+import KhabarPage from "../pages/KhabarPage";
+import OstanNamaPage from "../pages/OstanNamaPage";
+import MainPage from "../pages/MainPage";
+import RasadPage from "../pages/RasadPage";
+import Revayat from "../pages/Revayat";
 
 
 
@@ -24,19 +29,42 @@ export const router = createBrowserRouter([
         children : [
             {
                 path : '' ,
-                element : <></>
+                element : <MainPage/>,
+                children:[
+                    {
+                        path : 'twitter/' ,
+                        element : <TwiiterPage/>
+        
+                    },
+                    {
+                        path : 'telegram/' ,
+                        element : <TelegramPage/>
+        
+                    },
+                ]
 
             },
+            
             {
-                path : 'twitter/' ,
-                element : <TwiiterPage/>
-
+                path : 'ostanNama',
+                element : <OstanNamaPage/>
             },
             {
-                path : 'telegram/' ,
-                element : <TelegramPage/>
+                path : 'revayat',
+                element : <Revayat/>
+            },
+            // {
+            //     path : 'khabar/' ,
+            //     element : <KhabarPage/>
 
-            }
+            // },
+            {
+                path : 'rasad/' ,
+                element : <RasadPage/>
+
+            },
+           
+
             
            
         ]

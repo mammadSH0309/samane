@@ -1,24 +1,28 @@
 import { ResponsiveBar } from '@nivo/bar'
-import React from 'react'
+import React, { useState } from 'react'
+import { useGetEhsasTelegramNewsQuery } from '../query/Charts'
+import RadioSelect from './RadioSelect'
+import { useLocation } from 'react-router-dom'
 
-function BarCharts({data}) {
-
-
-const currentData = data.map((item)=>{
-    // console.log(item.trend)
-    let test = item.trend
-    console.log(test)
-    return test
-})
-console.log(currentData)
-
+function BarCharts({data , isLoading, title , valueLayout    }) {
+const [value , setValue ]  = useState(1)
+const location = useLocation()
+const {pathname} = location
+const path = pathname.split("/")[2]
+console.log(path)
+if(!isLoading){
 return (
+    <>
+    <div className='flex flex-row justify-between ml-5'>   
+            <div className='text-lg mr-5'>{title}</div>
+            <div><RadioSelect value={value} setValue={setValue} title1={'عمودی'} title2={'افقی'} /></div>
+    </div>
     <ResponsiveBar
-                enableLabel={false}
-                groupMode='grouped'
+    groupMode='stacked'
+    layout={value === 1 ? "vertical" : "horizontal"}
                 theme={{
                     text : {
-                        fontFamily : 'sahelBold'
+                        fontFamily : 'khameneiiRegular'
                     },
                     axis : {
                         legend : {
@@ -30,31 +34,39 @@ return (
                     }
                     
                 }}
-
-
                 data={data}
-                key={'trend'}
-                keys={['tweets_number']}
-                indexBy='datetime'
-                margin={{ top: 60, right: 100, bottom: 80, left: 120 }}
-                padding={0.12}
-                borderRadius={'4'}
+                borderWidth={2}
+                indexBy='channel_name'
+                keys={[
+                    'دختر',
+                    "کارگر",
+                    "قالی",
+                    "تهران",
+                    "ایران"
+                ]}
+                margin={{ top: 30, right: 100, bottom: 180, left: 120 }}
+                padding={0.15}
+                borderRadius={'0'}
                 axisLeft={{
-                    tickPadding : 18,
-                    legend : 'تعداد توییت',
+                    tickPadding : value === 1 ? 23 : 75,
+                    legend : value === 1 ? "تعداد توییت" : "ترند",
                     legendPosition : 'middle' , 
-                    legendOffset : -50,
-                    tickSize : 20, 
+                    tickRotation : -0,
+                    legendOffset : -90,
+                    tickSize : 5, 
                     
                 }}
                 axisBottom={{
-                    tickRotation : -40, 
-                    legend : 'ترند',
-                    legendOffset : 50,
+                    tickPadding : 15 , 
+                    tickRotation : -50, 
+                    legend : value === 1 ? "ترند" : "تعداد توییت",
+                    legendOffset : 90,
                     legendPosition : 'middle'
                 }}
             />
+         </>
   )
+}
 }
 
 export default BarCharts

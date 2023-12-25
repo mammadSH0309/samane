@@ -1,69 +1,112 @@
 import React, { useEffect, useState } from 'react'
-import {Col , Row , Flex , Form , Input , Button} from 'antd'
+import {Col , Row , Flex , Form , Input , Button, Spin, message, ConfigProvider} from 'antd'
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
 import FormItem from 'antd/es/form/FormItem'
 import { useLoginUserMutation } from '../query/Charts';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../slices/accountSlice';
-import { ToastContainer } from 'react-toastify';
-import Toastify from '../components/Toastify';
+import { login } from '../slices/accountSlice';
+import {Link} from 'react-router-dom'
+import data from '../assets/images/data.png'
+
 
 function LoginPage() {
 
-  const [loginUser , {data , isSuccess , isError , error , isLoading ,  }] = useLoginUserMutation();
-
-  
+  const [loginUser , {data , isSuccess ,  isLoading , error  }] = useLoginUserMutation('loginUser');
   const [username , setUsername] = useState('')
   const [password , setPassword] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  
-  const [isAuth , setIsAuth] =useState(JSON.parse(localStorage.getItem('user')) || "")
-  
+  const [isAuth ] =useState(JSON.parse(localStorage.getItem('user')))
+  console.log(isAuth)
 
-
-
-  // console.log(token)
-  
   useEffect(()=> {
     if(isAuth){
       navigate('/dashboard')
     }
-  }, [isAuth])
+  }, [isAuth ])
 
   useEffect(()=> {
     if(isSuccess) {
-      console.log(data)
-      dispatch(setUser({ token: data.access  }))
-      navigate('/dashboard')
+      dispatch(login({ 
+        token: data.access
+       }))
+      
+      navigate('/dashboard' , {replace :true})
     }
-  }, [isSuccess])
+  }, [isSuccess , ])
 
+
+  const handleLogin = async (e)=>{
+    e.preventDefault()
+    if(username && password) {
+      await loginUser({username , password});
+      if(error){
+        message.error('خطا در برقراری اتصال')
+      }
+      
+    }if (!username && !password){
+      message.error("لطفا نام کاربری و رمز عبور خود را وارد کنید")
+    }
+    else if (!username){
+      message.error("لطفا نام کاربری را وارد کنید")
+    }else if (!password) { 
+      message.error("لطفا رمز عبور را وارد کنید")
+    }
+  }
   
   
   return (
-    <Row>
-      <Col xs={24} sm={24} lg={10} className='bg-neutral-500 h-screen'>
-        <Toastify/>
-        <Flex justify='center' className='text-white mt-72' >
+    <ConfigProvider
+    theme={{
+      components : {
+        Form : {
+          itemMarginBottom : 1,
+          borderRadius : 0,
+          labelHeight : 50, 
+          
+          
+          
+        },
+        Button : {
+          borderRadius : 0 ,
+          fontSize : 18
+          
+        },
+       
+      }
+    }}
+    >
+      
+      <Row>
+      {/* https://demo.sadafdashboard.ir/images/logo_half.png */}
+      
+      <Col xs={24} sm={24} lg={10} className='bg-yellow-400 h-screen '>
+        <div className='flex flex-row justify-center items-center pt-10 align-middle  '>
+          <img 
+          className='h-52 w-52'
+          src="https://static.telewebion.com/channelsLogo/ZWE1OWZhYTEwODJhNjRlNDkzMmZhODM1MWU4NTEyN2FiMGM3NTk1MzFjY2I2ZTY0ZmMzNDQxZTMwNzc0NTI4Nw/default" alt="" /> 
+        </div>
+        <Flex justify='center' className='text-white mt-36' >
+          
           <Form 
           name='normal-login'
-          className='login-form'
-          labelCol={{span: 9}}
+          className='login-form rounded-none '
+          labelCol={{span: 2}}
           wrapperCol={{
-            span: 22,
+            span: 28,
           }}
           style={{
-            width : 500,
-            maxWidth: 600,
+            width : 400,
+            maxWidth: 500,
           }}
           autoComplete='off'
           >
             <FormItem
+           
             
-            name="نام کاربری"
+            name="نام کاربری" 
             rules={[
               {
                 required : true,
@@ -104,47 +147,59 @@ function LoginPage() {
               />
             </FormItem>
 
-            <FormItem>
+            <FormItem className='mt-10'>
+              <Spin
+              spinning={isLoading}
+              >
               <Button 
               type='primary' 
               htmlType='submit'
-              className='login-form-button w-full bg-blue-600'
-              
-              onClick={async (e)=> {
-                e.preventDefault();
-                // console.log(username)
-                // console.log(password)
-                if(username && password) {
-                  try {
-                    let {error} = await loginUser({username , password});
-                    let {status} = error
-                    if(status === 401){
-                      
-                    
-                    }
-                  } catch (error) {
-                    console.log()
-                  }
-                  
-                  
-                }else {
-                  console.log('error')
-                }
-              }}
+              className='login-form-button w-full bg-black  '
+              onClick={handleLogin}
               >
                 ورود
               </Button>
-            </FormItem>
+              </Spin>
+              <div className='flex flex-row justify-start mt-3'>
+                <Link>
+                  فراموشی رمز عبور
+                </Link>
+              </div>
+              <div className='flex flex-row mt-28 gap-1'>
+                <div>
+                نسخه : ۱۰.۹.۲۷ |
+                </div>
+                <div>
+                نسخه پایگاه داده: ۱۵۹ |
+                </div>
+                <div>
+                  <Link>
+                  لیست تغییرات 
+                  </Link>
+                </div>
+                |
+                <div>
+                  <Link>
+                  راهنمای ورود 
+                  </Link>
+                </div>
 
+              </div>
+            </FormItem>
           </Form>
         </Flex>
+        
+       
       </Col>
-      <Col xs={0} sm={0}  lg={14}>
-        <img 
-        src='https://static.vecteezy.com/system/resources/previews/005/879/539/non_2x/cloud-computing-modern-flat-concept-for-web-banner-design-man-enters-password-and-login-to-access-cloud-storage-for-uploading-and-processing-files-illustration-with-isolated-people-scene-free-vector.jpg'
-        /> 
+      <Col xs={0} sm={0}  lg={14} className='bg-white'>
+        <div >
+           <img 
+           src={data}
+           />   
+        </div>
       </Col>
     </Row>
+    </ConfigProvider>
   )
 }
 

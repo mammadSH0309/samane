@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from './router';
-import { ConfigProvider, Layout } from 'antd';
+import { ConfigProvider } from 'antd';
 import { Provider } from 'react-redux';
 import { store } from './query/Store';
+import LoginPage from './pages/LoginPage';
 
 
 
@@ -23,7 +24,7 @@ root.render(
     
   }}>
   <RouterProvider router={router}>
-      <App />
+      <LoginPage />
   </RouterProvider>
 </ConfigProvider>
   </Provider>

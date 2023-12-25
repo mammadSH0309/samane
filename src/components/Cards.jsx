@@ -6,17 +6,20 @@ import {Link, useLocation} from 'react-router-dom'
 function Cards({to , icon}) {
     
 
-    
+  const location = useLocation();
+  const path = location.pathname.split('/')[2]
+  
+
+ 
   return (
     <ConfigProvider
     > 
         <Link to={to}>
-        
-        <Card
-          
+         
+        <Card className='lg:w-[150x]'
           hoverable
           size='small'
-          style={{width : 220 , marginRight : 5  }}
+          style={{ marginRight : 5 , }}
         >
           <div className='flex flex-row gap-5' >
             {icon}

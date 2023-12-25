@@ -36,7 +36,7 @@ function IconMenu() {
         }
     }}
     >
-        <UserOutlined style={{fontSize : 20 , marginTop : 25 }}/>
+        <UserOutlined style={{fontSize : 20 , marginTop : 25 , marginLeft : 20}}/>
     </Dropdown>
   )
 }

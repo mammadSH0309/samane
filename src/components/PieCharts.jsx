@@ -9,14 +9,14 @@ function PieCharts({data}){
         <ResponsivePie
             theme={{
                 text : {
-                    fontFamily : 'sahelBold',
+                    fontFamily : 'khameneiiRegular',
                     
                 },
                
                 
             }}
                 data={data}
-                enableArcLabels = {false}
+                enableArcLabels = {true}
                 activeInnerRadiusOffset={15}
                 activeOuterRadiusOffset={15}
                 motionConfig={'wobbly'}
@@ -25,7 +25,6 @@ function PieCharts({data}){
                 value={'tweets_number'}
                 innerRadius={0.15}
                 padAngle={3} 
-                
                 arcLinkLabelsTextOffset={50}
                 arcLinkLabelsDiagonalLength={20}
                 arcLinkLabelsStraightLength={10}

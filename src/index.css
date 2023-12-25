@@ -37,6 +37,21 @@
   padding: 5px;
  
 }
+
+:where(.css-dev-only-do-not-override-16muavx).ant-input-affix-wrapper >input.ant-input {
+    padding: 0;
+    border: none;
+    border-radius: 0 !important;
+    outline: none;
+    height: 30px !important;
+}
+
+
+:where(.css-dev-only-do-not-override-7py20b).ant-layout .ant-layout-header, :where(.css-dev-only-do-not-override-7py20b).ant-layout.ant-layout-footer {
+  flex: 0 0 auto;
+  padding: 0;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   display: none; 

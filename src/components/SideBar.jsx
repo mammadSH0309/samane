@@ -1,45 +1,52 @@
-import React from 'react'
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { grey } from '@ant-design/colors';
-import { ConfigProvider, Menu } from 'antd';
+import React, { useState } from 'react'
+import { AppstoreOutlined, MailOutlined} from '@ant-design/icons';
+import {Layout} from 'antd';
+import { ConfigProvider, Flex, Menu } from 'antd';
+import { IoHomeOutline } from "react-icons/io5";
+import { FaTelegramPlane } from "react-icons/fa";
+import { IoNewspaperOutline } from "react-icons/io5";
+import { FaXTwitter } from "react-icons/fa6";
+import { RiTelegramLine } from "react-icons/ri";
 import { NavLink } from 'react-router-dom';
-import MenuItem from 'antd/es/menu/MenuItem';
-function SideBar() {
-
-    
-   
-
-     
-     
-
+const { Sider } = Layout;
+function SideBar({collapsed , setCollapsed}) {
 
     const styleText = {
         color : 'black'
     }
 
-  return (
-    <ConfigProvider 
-        theme={{
-            components : {
-                Menu : {
-                    
-                    itemHoverBg : '#ffd666',                
-                    itemColor : '#F0A500',
-                    darkSubMenuItemBg : '#F0A500',
-                    backgroundColor : '#000000',
-                    horizontalItemSelectedColor : '#F0A500',
-                    horizontalItemHoverColor : '#F0A500', 
-                    margin : 2 , 
-                    padding : 10,
-                    zIndexBase:100,
-                    itemSelectedColor : "F0A500"
-                    
+
+    return (
+        <ConfigProvider 
+            theme={{
+                components : {
+                    Menu : {
+                        
+                        itemHoverBg : '#ffd666',                
+                        itemColor : '#F0A500',
+                        darkSubMenuItemBg : '#F0A500',
+                        backgroundColor : '#000000',
+                        horizontalItemSelectedColor : '#F0A500',
+                        horizontalItemHoverColor : '#F0A500', 
+                        margin : 2 , 
+                        padding : 10,
+                        zIndexBase:100,
+                        itemSelectedColor : "F0A500"
+                        
+                    }
                 }
-            }
-        }}
+            }}
+        >
+    <Sider collapsed={collapsed} onCollapse={(v)=> setCollapsed(v)} 
+    breakpoint='md' 
+    className='h-screen ' 
+    theme='light'
+    style={{ position: 'sticky' , top : 0 , right: 0 , bottom : 0 , backgroundColor : 'black'}}
     >
-        
-        <Menu  
+      <Flex justify='center' align='center' className='h-20 w-full text-white'  >
+          نام کاربری
+      </Flex>
+      <Menu  
         theme='dark'
         style={{ backgroundColor : "black" }}
         defaultActiveFirst={['/dashboard']}
@@ -53,38 +60,104 @@ function SideBar() {
                            صفحه اصلی
                        </NavLink>,
                 key : '/dashboard' , 
-                icon : <AppstoreOutlined/>,   
+                icon : <IoHomeOutline/>,   
             },
             {
-             label : <NavLink to={'cards'} 
+             label : <NavLink to={'khabar'} 
                     
                     >
-                        خبرنگار
+                        لحظه نگار
                     </NavLink>,
              key : '/khabarnegar' , 
-             icon : <AppstoreOutlined/>,
+             icon : <IoNewspaperOutline/>,
              
              
             },
             {
+                label : <NavLink to={'ostanNama'} 
+                       
+                       >
+                        استان نما
+                       </NavLink>,
+                key : '/ostan' , 
+                icon : <IoNewspaperOutline/>,
+                
+                
+            },
+            {
+                label : <NavLink to={'rasad'} 
+                       
+                       >
+                        رصد نگار 
+                       </NavLink>,
+                key : '/rasad' , 
+                icon : <IoNewspaperOutline/>,
+                
+                
+            },
+            {
+                label : <NavLink to={'revayat'} 
+                       
+                       >
+                        روایت اول  
+                       </NavLink>,
+                key : '/revayat' , 
+                icon : <IoNewspaperOutline/>,
+                
+                
+            },
+            {
+                label : <NavLink to={'cards'} 
+                       
+                       >
+                            شایعات و اخبار جعلی
+                       </NavLink>,
+                key : '/shayeat' , 
+                icon : <IoNewspaperOutline/>,
+                
+                
+            },
+            {
+                label : <NavLink to={'cards'} 
+                       
+                       >
+                        افکار سنجی   
+                       </NavLink>,
+                key : '/afkar' , 
+                icon : <IoNewspaperOutline/>,
+                
+                
+            },
+            {
+                label : <NavLink to={'cards'} 
+                       
+                       >
+                        هوش نگار    
+                       </NavLink>,
+                key : '/hosh' , 
+                icon : <IoNewspaperOutline/>,
+                
+                
+            },
+
+            // {
             
-             label : <NavLink to={'search'}
-             > 
-                سکو نما
-             </NavLink>, 
-             icon : <MailOutlined/>,
-             children : [
-                {
-                    label : 'توییتر',
-                    style : styleText,
-                },
-                {   
-                    label : 'تلگرام',
-                    style : styleText
-                }
-             ]
+            //  label :    'سکونما' ,
+            //  icon : <MailOutlined/>,
+            //  children : [
+            //     {   
+            //         icon : <FaXTwitter style={{fontSize : 15}}/>,
+            //         label : 'توییتر',
+            //         style : styleText,
+            //     },
+            //     {   
+            //         icon : <FaTelegramPlane  style={{fontSize : 15}}/>,
+            //         label : 'تلگرام',
+            //         style : styleText
+            //     }
+            //  ]
              
-            }
+            // }
         ]}
         
         ///lable = name , id = key , childern == sub 
@@ -94,8 +167,16 @@ function SideBar() {
         }}
         >
         </Menu>
-    </ConfigProvider>
-  )
+    </Sider> 
+ </ConfigProvider>
+)
+     
+     
+
+
+   
+
+ 
 }
 
 export default SideBar

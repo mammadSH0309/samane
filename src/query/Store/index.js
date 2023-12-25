@@ -1,12 +1,14 @@
 import {configureStore} from '@reduxjs/toolkit'
-import { accountApi, chartsApi } from '../Charts'
+import { accountApi, chartsTwitterApi , chartsTelegramApi  , rasadNegarApi} from '../Charts'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import accountReducer from './../../slices/accountSlice';
 
 export const store = configureStore({
     reducer : {
         account : accountReducer , 
-        [chartsApi.reducerPath] : chartsApi.reducer,
+        [rasadNegarApi.reducerPath] : rasadNegarApi.reducer,
+        [chartsTwitterApi.reducerPath] : chartsTwitterApi.reducer,
+        [chartsTelegramApi.reducerPath] : chartsTelegramApi.reducer,
         [accountApi.reducerPath] : accountApi.reducer
     },
 
@@ -14,8 +16,10 @@ export const store = configureStore({
         (getDefaultMiddleware) => 
             getDefaultMiddleware()
             .concat([
-                        chartsApi.middleware,
-                        accountApi.middleware
+                        chartsTwitterApi.middleware,
+                        chartsTelegramApi.middleware ,
+                        accountApi.middleware , 
+                        rasadNegarApi.middleware
                     ])
 
     
