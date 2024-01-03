@@ -30,6 +30,7 @@ export const router = createBrowserRouter([
             {
                 path : '' ,
                 element : <MainPage/>,
+                
                 children:[
                     {
                         path : 'twitter/' ,
@@ -46,8 +47,13 @@ export const router = createBrowserRouter([
             },
             
             {
-                path : 'ostanNama',
-                element : <OstanNamaPage/>
+                path : 'ostanNama/',
+                
+                element : <OstanNamaPage/>,
+               
+                  // and the action
+                  
+                
             },
             {
                 path : 'revayat',

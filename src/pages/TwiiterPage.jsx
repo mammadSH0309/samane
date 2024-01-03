@@ -62,7 +62,7 @@ function TwiiterPage() {
         <>
         <Row className=' p-2'>
             <Col xs={24} sm={24} md={12} lg={10} xl={12}  >
-                <div className='h-96 shadow-lg bg-white rounded-lg m-2'>
+                <div className='h-96 rounded-md border border-gray-200   bg-white rounded-lg m-2'>
                 <div className='flex flex-row mr-5 pt-5 justify-between text-lg'>
                 <div>موجودیت سنج</div>
                 </div> 
@@ -70,7 +70,7 @@ function TwiiterPage() {
                 </div>
             </Col>
             <Col xs={24} sm={24}  md={12} lg={10} xl={12}  >
-            <div className='h-96 shadow-lg m-2 bg-white rounded-lg'>
+            <div className='h-96  rounded-md border border-gray-200  m-2 bg-white rounded-lg'>
                 <div className='flex flex-row mr-5 pt-5 justify-between text-lg'>
                 <div className=''>جریان سنج</div>
                 </div>
@@ -80,13 +80,13 @@ function TwiiterPage() {
                
             </Col>
             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                <div className='h-96 shadow-lg  bg-white rounded-lg m-2'>
+                <div className='h-96  rounded-md border border-gray-200  bg-white rounded-lg m-2'>
                    <ParallelCharts data={dataEhsasTelegramParallel} isLoading={loadingEhsasTelegramParallel} />
                </div>
                 
             </Col>
             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                <div className='h-96 shadow-lg m-2 bg-white rounded-lg'>
+                <div className='h-96  rounded-md border border-gray-200  m-2 bg-white rounded-lg'>
                 <div className='flex flex-row m-2 justify-between text-lg'>
                 </div>
                 <BarCharts data={dataEhsasTelegramYear} isLoading={loadingEhsasTelegramYear} valueLayout={valueRadio} title={"رسانه سنج"}  />
@@ -94,20 +94,17 @@ function TwiiterPage() {
                 </div>
             </Col>
             <Col xs={24} sm={24} md={12} lg={12} xl={8}>
-                <div className='h-96 shadow-lg m-2 bg-white rounded-lg'>
+                <div className='h-96  rounded-md border border-gray-200  m-2 bg-white rounded-lg'>
                     <PieCharts data={chartDay}/>
                 </div>
-            </Col>
-            <Col xs={24} sm={24} md={12} lg={12} xl={16}>
-               <Khabar/>
             </Col>
             {/* <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                 <div className='h-96 shadow-lg m-2 pt-12 bg-white rounded-lg'>
                     <LineCharts data={dataEhsasTelegram} isLoading={loadingEhsasTelegram} />
                 </div>
             </Col> */}
-            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                <div className='h-96 shadow-lg m-2 pt-12 bg-white rounded-lg'>
+            <Col xs={24} sm={24} md={12} lg={12} xl={16}>
+                <div className='h-96  rounded-md border border-gray-200 m-2 pt-12 bg-white rounded-lg'>
                     <CircleCharts/> 
                 </div>
             </Col>

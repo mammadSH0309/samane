@@ -37,7 +37,7 @@ function MainPage() {
             </Col>
           </Row>
           
-          <div className='h-96 shadow-lg bg-white rounded-lg  mr-3 ml-3'>
+          <div className='h-96  bg-white rounded-md border border-gray-200  mr-3 ml-3'>
           <div className='flex flex-row mr-3 pt-5 justify-between text-lg'>
                 <div>احساسات سنج</div>
           </div>

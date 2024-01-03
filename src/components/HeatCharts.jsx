@@ -1,8 +1,9 @@
 import {ResponsiveHeatMap} from "@nivo/heatmap"
 import React from 'react'
 
-function HeatCharts({data , isLoading}) {
-if(!isLoading){
+function HeatCharts({data }) {
+
+    console.log('data' , data)
   return (
     <ResponsiveHeatMap
     theme={{
@@ -19,7 +20,7 @@ if(!isLoading){
         }
     }}
     data={data}
-    margin={{ top: 75, right: 80, bottom: 150, left: 80 }}
+    margin={{ top: 75, right: 30, bottom: 80, left: 80 }}
    
     xOuterPadding={0.10}
     yOuterPadding={0.10}
@@ -66,7 +67,6 @@ if(!isLoading){
     ]}
 />
   )
-}
 }
 
 export default HeatCharts

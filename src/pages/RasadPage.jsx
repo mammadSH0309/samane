@@ -1,13 +1,17 @@
-import { Col, Row } from 'antd'
+import { Col, Divider, Image, Row } from 'antd'
 import React from 'react'
 import CardKhabar from '../components/CardKhabar'
 import BasteNama from '../components/BasteNama'
-import { useGetBasteNamaQuery, useGetFakeNewsQuery, useGetMehvarNamaQuery, useGetRasadNamaQuery } from '../query/Charts'
-import { Skeleton } from 'antd';
+import { useGetAfkarQuery, useGetBasteNamaQuery, useGetFakeNewsQuery, useGetMehvarNamaQuery, useGetRasadNamaQuery, useGetRevayatQuery } from '../query/Charts'
+import { Skeleton, id } from 'antd';
 import BasteDownload from '../components/BasteDownload'
 import MehvarNama from '../components/MehvarNama'
 import CardT from '../components/CardT'
-
+import SwiperKhabar from '../components/SwiperKhabar'
+import BubbleChat from '../components/BubbleChat'
+import Accordion from '../components/Accordion'
+import AfkarSanji from '../components/AfkarSanji'
+import {Link , animateScroll , scroller } from 'react-scroll'
 
 function RasadPage() {
     // dataRasad
@@ -16,49 +20,115 @@ function RasadPage() {
   const {data:dataRasad , isLoading:loadingRasad } = useGetRasadNamaQuery()
   const {data:dataBaste, isLoading:loadingBaste } = useGetBasteNamaQuery()
   const {data:dataMehvar , isLoading:loadingMehvar } = useGetMehvarNamaQuery()
+  const {data:dataRevayat , isLoading : loadingRevayat , isSuccess : successRevayat} = useGetRevayatQuery()
+  const {data:dataAfkar , isLoading : loadingAfkar , isSuccess : successAfkar} = useGetAfkarQuery()
   
-if(!loadingBaste && !loadingRasad && !loadingMehvar)
+if(!loadingBaste && !loadingRasad && !loadingMehvar && !loadingAfkar)
 {
    const lastData = dataBaste[0]
-   console.log(lastData)
        
   return (
     <>
-      <Row className='m-3 gap-5  mt-3 bg-slate-100 shadow-lg rounded-lg h-auto items-center  ' justify={'center'} align={'middle'}  >
-        {dataRasad?.map((item , index)=>(
-          <Col lg={5} md={24} xl={5}>
+      <Row>
+        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24} >
+          {!loadingRevayat && successRevayat ? (dataRevayat.map((dataAfkar , index)=>(
+            <Accordion title={dataAfkar.title} des={dataAfkar.description} type={dataAfkar.type_packet} doc={dataAfkar.documents}/>
+          ))) : (<>
+          <Skeleton/>
+          <Skeleton/>
+          <Skeleton/>
+          </>)}
+        </Col>
+      </Row>
+
+
+      
+
+      <Row className='m-3 gap-12 mt-3 h-auto   items-center  ' justify={'center'} align={'middle'}  >
+       
+      <Col lg={24} md={24} xl={18}>
+          
            
           <CardKhabar 
-            title={item.title}
-            dec={item.description} 
-            important={item.important_level}
-            tag={item.subject_tag}
-            time={item.date_time_upload}
+            // title={item.title}
+            // dec={item.description} 
+            // important={item.important_level}
+            // tag={item.subjecimport { Skeleton } from '@mui/material';
+
+            // time={item.date_time_upload}
             />
+        
         </Col>
-        ))}
+        
+     
+       
       </Row>
-      <Row className='m-3 gap-5  mt-3 bg-slate-100 shadow-lg rounded-lg items-center h-auto flex flex-row justify-center '>
+
+
+      <div className=' ml-20 mr-20'>
+      <Divider style={{color : 'gray'}} >
+        <div className='text-xl'>
+        بوم انتخاباتی 
+        </div>
+      </Divider>
+      </div>
+
+      <Row className='m-3 gap-5  mt-3   rounded-lg items-center h-auto flex flex-row justify-center '>
       {dataBaste?.map((item , index)=>(
-      <Col lg={5} md={24} key={index}>
+      <Col lg={4} xl={5} md={24} key={index}>
         <BasteNama title={item.title} dec={item.description} time={item.date_time_upload} image={item.images} download={item.documents}/>
       </Col>
       ))}
       </Row>
+
+      <div className=' ml-20 mr-20'>
+      <Divider style={{color : 'gray'}} >
+        <div className='text-xl'>
+        شایعات
+        </div>
+      </Divider>
+      </div>
       
-      <Row  className=' bg-slate-100  h-auto px-5 py-5 pl-96  gap-5  m-3 mt-3 shadow-lg rounded-lg  ' >
-     <Col span={12}  >
-       <CardT/>
-     </Col>
-    
-    </Row>
-    <Row className='shadow-xl rounded-lg  gap-5  m-3 mt-3    h-96'>
-        <Col  xl={24} >
-          <BasteDownload title={lastData.title} dec={lastData.description} time={lastData.date_time_upload} download={lastData.documents} images={lastData.images} />
+      <Row  className='m-3 p-4   mt-1  flex flex-row h-96  rounded-lg   '>
+        <Col xl={16}>
+            <CardT/>
+           
         </Col>
-        
-        
+        <Col  xl={8}>
+            <BubbleChat/>
+            
+        </Col>
+      </Row>
+   
+    <Row >
     </Row>
+
+    
+    <div className=' ml-20 mr-20'>
+      <Divider style={{color : 'gray'}} >
+        <div className='text-xl'>
+        افکار سنجی
+        </div>
+      </Divider>
+      </div>
+
+    <Col className='m-3 mt-3 h-auto  rounded-lg    py-2'>
+     <Row className='justify-items-center justify-center w-full gap-4 items-center text-center' >
+       <Col sm={5} lg={4} md={5} xl={4} >
+       {!loadingAfkar && successAfkar ? (dataAfkar.map((dataAfkar , index)=>(
+            <AfkarSanji title={dataAfkar.title} des={dataAfkar.description} type={dataAfkar.type_packet} doc={dataAfkar.documents} img={dataAfkar.images}/>
+          ))) : (<>
+          <Skeleton/>
+          <Skeleton/>
+          <Skeleton/>
+          </>)}  
+        </Col>  
+           
+    </Row>  
+
+       
+       
+    </Col>
     
         
     

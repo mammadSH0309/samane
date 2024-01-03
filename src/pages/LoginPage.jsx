@@ -19,7 +19,7 @@ function LoginPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const [isAuth ] =useState(JSON.parse(localStorage.getItem('user')))
-  console.log(isAuth)
+  
 
   useEffect(()=> {
     if(isAuth){

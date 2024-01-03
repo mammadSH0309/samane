@@ -18,6 +18,12 @@ export const rasadNegarApi = createApi({
         }),
         getFakeNews : builder.query({
             query : ()=> 'get/fakenews'
+        }),
+        getRevayat : builder.query({
+            query : ()=> 'get/revayat'
+        }),
+        getAfkar : builder.query({
+            query : ()=> 'get/afkar/'
         })
     })
 })
@@ -68,7 +74,32 @@ export const chartsTelegramApi = createApi({
         }),
         getEhsasTelegramNewsParallel: builder.query({
             query : ()=> 'ehsastelegramnewsparallelcoordinates/get/'
+        }),
+        getTelegramNewsOstan : builder.query({
+            query : (ostan)=> `telegramnewsostan/get/?ostan=${ostan}`
+        }),
+        getTelegramNewsOstanAll : builder.query({
+            query : (ostan)=> `telegramnewsostan/get`
+        }),
+        getTelegramNewsOstanEhsas : builder.query({
+            query : (ostan)=> `telegramnewsostanehsassevenstackchart/get/?ostan=${ostan}`
+        }), 
+        getTelegramNewsTolidMasraf : builder.query({
+            query : (ostan)=> `telegramnewsostanttolidmasraftlinechart/get/?ostan=${ostan}`
+        }),
+        getTelegramNewsOstanHeatMap : builder.query({
+            query : (ostan)=> `telegramnewsostanheatmap/get/?ostan=${ostan}`
+        }),
+        getTelegramNewsOnline: builder.query({
+            query : ()=> 'telegramnewsonline/get/'
+        }),
+        getTelegramNewsPrivate: builder.query({
+            query : ()=> 'telegramnewsonlineprivate/get/'
+        }), 
+        getTelegramNewsHot : builder.query({
+            query : ()=> 'telegramnewshot/get/'
         })
+
     })
 })
 
@@ -88,7 +119,7 @@ export const accountApi = createApi({
     })
 })
 
-export const { useGetRasadNamaQuery , useGetBasteNamaQuery , useGetMehvarNamaQuery , useGetFakeNewsQuery} = rasadNegarApi
+export const {useGetAfkarQuery, useGetRasadNamaQuery , useGetBasteNamaQuery , useGetMehvarNamaQuery , useGetFakeNewsQuery , useGetRevayatQuery } = rasadNegarApi
 export const {useLoginUserMutation} = accountApi
 export const {useGetChartsDayTwitterQuery,useGetChartsMonthTwitterQuery ,useGetChartsYearTwitterQuery, useGetChartsTwitterWithParamsQuery } = chartsTwitterApi
-export const {useGetEhsasTelegramNewsQuery , useGetEhsasTelegramNewsPerMonthQuery , useGetEhsasTelegramNewsPerYearQuery , useGetEhsasTelegramNewsHeatMapQuery , useGetEhsasTelegramNewsParallelQuery} = chartsTelegramApi
+export const {useGetTelegramNewsHotQuery,useGetTelegramNewsOnlineQuery , useGetTelegramNewsPrivateQuery,useGetTelegramNewsOstanHeatMapQuery,useGetTelegramNewsTolidMasrafQuery,useGetTelegramNewsOstanEhsasQuery,useGetTelegramNewsOstanAllQuery,useGetTelegramNewsOstanQuery,useGetEhsasTelegramNewsQuery , useGetEhsasTelegramNewsPerMonthQuery , useGetEhsasTelegramNewsPerYearQuery , useGetEhsasTelegramNewsHeatMapQuery , useGetEhsasTelegramNewsParallelQuery} = chartsTelegramApi

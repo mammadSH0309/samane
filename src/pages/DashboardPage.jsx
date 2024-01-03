@@ -1,7 +1,7 @@
 import { Col, Layout, Row } from 'antd';
 import SideBar from '../components/SideBar';
 import HeaderItem from '../components/HeaderItem';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Cards from '../components/Cards';
 import { FaTelegramPlane } from "react-icons/fa";
@@ -19,13 +19,12 @@ function DashboardPage() {
   
   const [collapsed , setCollapsed] = useState(false);
   const {data , isLoading} = useGetEhsasTelegramNewsQuery('ehsasTelegram')
-  
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('user') || "{}");
   useEffect(()=>{
   dispatch(login(user))
   }, [user])
-
 
 
  
@@ -36,8 +35,7 @@ function DashboardPage() {
 
   const [value , setValue] = useState(1)
   
-  
-
+ 
   return (
     <Layout>
       <SideBar collapsed={collapsed} setCollapsed={setCollapsed}/>
