@@ -31,8 +31,8 @@ if(!isLoading){
   }}
   animate={true}
   data={data}
-  curve='natural'
-    margin={{ top: 20, right: 120, bottom: 150, left: 90 }}
+  curve='linear'
+    margin={{ top: 20, right: 90, bottom:80, left: 90 }}
    
     axisTop={null}
     axisRight={null}
@@ -54,13 +54,13 @@ if(!isLoading){
         legendPosition: 'middle'
     }}
 
-    lineWidth={0} 
-    pointSize={8}
+    lineWidth={2} 
+    pointSize={6}
     pointColor={{ theme: 'background' }}
-    pointBorderWidth={5}
+    pointBorderWidth={2}
     pointBorderColor={{ from: 'serieColor' }}
     pointLabelYOffset={-12}
-    useMesh={true}
+    
     legends={[
         {
             anchor: 'top-right',

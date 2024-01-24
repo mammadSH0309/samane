@@ -9,7 +9,6 @@ const [value , setValue ]  = useState(1)
 const location = useLocation()
 const {pathname} = location
 const path = pathname.split("/")[2]
-console.log(path)
 if(!isLoading){
 return (
     <>

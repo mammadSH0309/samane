@@ -9,7 +9,7 @@ function BarChartApex() {
 
     const {data , isLoading , isSuccess, isError , error} = useGetTelegramNewsOstanAllQuery()
 
-     console.log(data)
+
       return(
         <>
         <div className="app">
@@ -17,7 +17,7 @@ function BarChartApex() {
                 <Row>
                 <Col sm={24}  md={24} lg={12} xl={12}>
                 <Divider >مثبت ترین</Divider>
-                <div className="mixed-chart ml-1 p-5   border shadow-md sm:rounded-lg  sm:flex sm:flex-row sm:justify-center  ">
+                <div className="mixed-chart ml-1 p-5 h-[250px]   border shadow-md sm:rounded-lg  sm:flex sm:flex-row sm:justify-center  ">
                 {!isLoading && isSuccess ? (
                     <Chart
             
@@ -47,18 +47,18 @@ function BarChartApex() {
                             },
                         ],
                     chart: {
-                        height : '100%',
+                       
                         id: "basic-bar"
                       },
                       
                       xaxis: {
                         categories: data?.top_five_ostan_npo.map((item)=>[item.ostan]),
-                        offsetY : 10,
-                        offsetX : -5 , 
+                        offsetY : 30,
+                        offsetX : -30, 
                         labels : {
-                            rotate : 45,   /// farsi = -45
-                            maxHeight : 80
-                        }
+                        rotate : -25,   /// farsi = -45
+                        maxHeight : 60
+                    }
                       },
                       yaxis : {
                         labels: {
@@ -79,6 +79,7 @@ function BarChartApex() {
                     
                       type="bar"
                       width="330"
+                      height='220'
                     />
                 ) : (
                     <Skeleton animation="wave" />
@@ -89,7 +90,7 @@ function BarChartApex() {
                 <Col sm={24}  md={24} lg={12} xl={12}>
                 <Divider> پربازدید ترین
                 </Divider>
-                <div className="mixed-chart  p-5 border border-white shadow-md sm:rounded-lg sm:flex sm:flex-row sm:justify-center">
+                <div className="mixed-chart h-[250px]   p-5 border border-white shadow-md sm:rounded-lg sm:flex sm:flex-row sm:justify-center">
                 {!isLoading && isSuccess ? (
                   <Chart
                   
@@ -122,11 +123,11 @@ function BarChartApex() {
                       },
                       xaxis: {
                         categories: data?.top_five_ostan_views_post.map((item)=>[item.ostan]),
-                        offsetY : 10,
-                        offsetX : -5 , 
+                        offsetY : 30,
+                        offsetX : -30, 
                         labels : {
-                        rotate : 45,   /// farsi = -45
-                        maxHeight : 80
+                        rotate : -25,   /// farsi = -45
+                        maxHeight : 60
                     }
                       },
                       yaxis : {
@@ -147,6 +148,7 @@ function BarChartApex() {
                   ]}
                   type="bar"
                   width="330"
+                  height='220'
                 />
 
                 ) : (

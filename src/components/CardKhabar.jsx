@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { IoCopy } from "react-icons/io5";
 import {message} from 'antd'
 import {Swiper , SwiperSlide} from 'swiper/react'
-import {Pagination} from 'swiper/modules'
+import {Pagination , Autoplay,} from 'swiper/modules'
 import { EffectCoverflow} from 'swiper/modules'
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -14,28 +14,34 @@ function CardKhabar({title  ,dec , important , tag , time}) {
 
   const Stitle = dec?.slice(0,100)
   const [visible , setVisible] = useState(true)
+
+  // const progressCircle = useRef(null);
+  // const progressContent = useRef(null);
+  // const onAutoplayTimeLeft = (s, time, progress) => {
+  //   progressCircle.current.style.setProperty('--progress', 1 - progress);
+  //   progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+  // };
   
   return (
    <>
     <Swiper
+    spaceBetween={25}
     loop={true}
-    effect={'coverflow'}
+    autoplay={{
+      delay: 2500,
+      disableOnInteraction: false,
+    }}
     grabCursor={true}
     centeredSlides={true}
     slidesPerView={3}
-    coverflowEffect={{
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-    }}
-    pagination={true}
-    modules={[EffectCoverflow, Pagination]}
+    
+    
+    modules={[ Pagination]}
     className="mySwiper"
       >
         {dataRasad.map((item , index)=>(
-                <SwiperSlide>
-                          <div className="  rounded  shadow-lg my-3   h-full w-full  rounded-tl-lg rounded-br-lg  border border-black ">
+                <SwiperSlide className='gap-2'>
+                    <div className="  rounded  shadow-lg my-3   h-full w-full  rounded-tl-lg rounded-br-lg  border border-black ">
                     <div className=" px-3 py-6   font-bold  mb-1 text-justify h-20 ">{item.title}</div>
                     <div className="px-3 pt-4 ">
                     <div className=' h-20 border-white drop-shadow-xl overscroll-y-contain overflow-scroll bg-scroll text-sm  font-khameneiiRegular  '>

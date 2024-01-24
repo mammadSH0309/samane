@@ -28,28 +28,28 @@ if(!isLoading){
         
     }}
         data={data}
-        groups={[  'منفی' , 'بدون واکنش', 'مثبت'   ]}
+        groups={[ 'negative' ,'neutral',  'positive']}
         groupBy={'npo'}
         identity="id"
         value="count"
        
-        colors={{ scheme: 'category10' }}
+        colors={{ scheme: 'brown_blueGreen' }}
         forceStrength={9}
-        valueScale={{ type: 'linear', min: 0, max: 4000, reverse: false }}
+        valueScale={{ type: 'linear', min : -1 ,  reverse: false }}
         size={{
           key: 'sum',
           values: [
-            0,
-            2000000
+            10,
+            100000
           ],
           sizes: [
-              4,
-              8
+              10,
+              50
           ]
       }}
-        spacing={11}
-        
-        simulationIterations={100}
+        spacing={2}
+        animate={false}
+        simulationIterations={200}
         borderColor={{
             from: 'color',
             modifiers: [
@@ -63,8 +63,8 @@ if(!isLoading){
                 ]
             ]
         }}
-        margin={{ top: 50, right: 120, bottom: 140, left: 120 }}
-  
+        margin={{ top: 30, right: 70, bottom: 55, left: 80 }}
+        
         axisBottom={{
             orient: 'bottom',
             tickSize: 10,
@@ -81,8 +81,10 @@ if(!isLoading){
             tickRotation: 0,
             legend: 'تعداد',
             legendPosition: 'middle',
-            legendOffset: -76
+            legendOffset: -75
         }}
+        axisTop={null}
+        axisRight={null}
     />
   )
 }

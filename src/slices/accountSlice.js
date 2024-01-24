@@ -1,39 +1,31 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+import { accountApi } from "../query/Charts";
 
-
-const initialState = { 
-    token : null ,
-    refresh : null , 
-    isAuth : false
+const initialState = 
+{
+    access : '',
+    refresh : ''
 }
 
-export const accountSlice = createSlice({
-    name : 'accountAuth', 
-    initialState,
+export const authApi = createSlice({
+    name : 'auth', 
+    initialState ,
     reducers : {
-        login : (state , action) =>{
-            localStorage.setItem('user' , JSON.stringify({
-                token : action.payload.token,
-                // refresh : action.payload.refresh
-            })
-            )
-            state.token = action.payload.token
-            // state.refresh = action.payload.refresh
-            state.isAuth = true
+        login : (state , action) => {
+            const {access , refresh } = action.payload
+            state.access = access
+            state.refresh = refresh
+            localStorage.setItem('access' , access)
+            localStorage.setItem('refresh' , refresh)
         },
-        logout : (state) =>{
-            localStorage.clear();
-            state.token = null 
-            // state.refresh = null
-            state.isAuth = false
+        logout : (state , action) => {
+            state.access = null 
+            state.refresh = null
+            localStorage.clear()
         }
     }
 })
 
+export const {login , logout} = authApi.actions
 
-
-export const {login, logout}  = accountSlice.actions
-
-export default accountSlice.reducer
-
-
+export default authApi.reducer

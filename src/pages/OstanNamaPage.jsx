@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Map from '../components/Map'
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom'
-import {IranMap } from "react-iran-map"
 import { useGetTelegramNewsOstanQuery } from '../query/Charts'
-import { Col, Divider, Row } from 'antd'
+import { Col,  Row } from 'antd'
 import TableAkhbar from '../components/TableAkhbar'
 import BarChartApex from '../components/BarChartApex'
-import { Skeleton } from '@mui/material'
+import { Divider, Skeleton } from '@mui/material'
+import BubbleChartApex from '../components/BubbleChartApex'
+import TableDataOstan from '../components/TableDataOstan'
 function OstanNamaPage() {
 const [params , setParams] = useSearchParams()
 
@@ -24,7 +25,7 @@ const {data  , isLoading , isSuccess} = useGetTelegramNewsOstanQuery(params.get(
     <>
     <Row>
       <Col md={23} lg={24} xl={12} className='  mt-3'>
-        <Divider orientation='left'  style={{color:'gray'}}>
+        <Divider  textAlign='left'   style={{color:'gray'}}>
            نسبت سنج
         </Divider>
         <div className='m-2'>

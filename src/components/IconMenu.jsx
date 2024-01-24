@@ -4,7 +4,8 @@ import { Dropdown,} from 'antd';
 
 import {  useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../slices/accountSlice';
+import { logout } from '../slices/AccountSlice';
+
 
 const items = [
     {

@@ -6,54 +6,70 @@ import FormItem from 'antd/es/form/FormItem'
 import { useLoginUserMutation } from '../query/Charts';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../slices/accountSlice';
+import {login} from '../slices/AccountSlice';
 import {Link} from 'react-router-dom'
 import data from '../assets/images/data.png'
+import { useLoginMutation } from '../query/Auth/AuthSlice';
 
 
 function LoginPage() {
 
-  const [loginUser , {data , isSuccess ,  isLoading , error  }] = useLoginUserMutation('loginUser');
+  const [loginUser , {data , isSuccess ,  isLoading , error , isError }] = useLoginMutation('loginUser');
   const [username , setUsername] = useState('')
   const [password , setPassword] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const [isAuth ] =useState(JSON.parse(localStorage.getItem('user')))
+ 
+
+ 
+
   
-
-  useEffect(()=> {
-    if(isAuth){
-      navigate('/dashboard')
-    }
-  }, [isAuth ])
-
-  useEffect(()=> {
-    if(isSuccess) {
-      dispatch(login({ 
-        token: data.access
-       }))
-      
-      navigate('/dashboard' , {replace :true})
-    }
-  }, [isSuccess , ])
 
 
   const handleLogin = async (e)=>{
     e.preventDefault()
-    if(username && password) {
-      await loginUser({username , password});
-      if(error){
-        message.error('خطا در برقراری اتصال')
+
+    try {
+      const dataAuth = await loginUser({username , password}).unwrap()
+      console.log(dataAuth)
+      dispatch(login(dataAuth))
+      setUsername('')
+      setPassword('')
+      navigate('/dashboard/homepage')
+    } catch (err) {
+      if (!err.status) {
+        console.log('asdsad')
+      } else if (err.status === 400) {
+        console.log('error 400')
+      } else if (err.status === 401) {
+        console.log('error 401')
+      } else {
+        console.log(err.data?.message);
       }
+    }
+    
+    // if(username && password) {
+    //   await loginUser({username , password});
+    //   if(error){
+    //     message.error('خطا در برقراری اتصال')
+        
+    //   }else {
+    //     console.log(data)
+    //     console.log(error)
+    //     console.log(isError)
+    //   }
       
-    }if (!username && !password){
-      message.error("لطفا نام کاربری و رمز عبور خود را وارد کنید")
-    }
-    else if (!username){
-      message.error("لطفا نام کاربری را وارد کنید")
-    }else if (!password) { 
-      message.error("لطفا رمز عبور را وارد کنید")
-    }
+    // }if (!username && !password){
+    //   message.error("لطفا نام کاربری و رمز عبور خود را وارد کنید")
+    // }
+    // else if (!username){
+    //   message.error("لطفا نام کاربری را وارد کنید")
+    // }else if (!password) { 
+    //   message.error("لطفا رمز عبور را وارد کنید")
+    // }
+
+
+    // navigate('/dashboard/mainpage')
   }
   
   

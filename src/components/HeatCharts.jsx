@@ -1,9 +1,9 @@
 import {ResponsiveHeatMap} from "@nivo/heatmap"
 import React from 'react'
 
-function HeatCharts({data }) {
+function HeatCharts({data  , min , max}) {
 
-    console.log('data' , data)
+
   return (
     <ResponsiveHeatMap
     theme={{
@@ -20,32 +20,26 @@ function HeatCharts({data }) {
         }
     }}
     data={data}
-    margin={{ top: 75, right: 30, bottom: 80, left: 80 }}
+    margin={{ top: 35, right: 30, bottom: 80, left: 80 }}
    
     xOuterPadding={0.10}
     yOuterPadding={0.10}
-    axisTop={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: -90,
-        legend: '',
-        legendOffset: 46
-    }}
+    
     
     axisLeft={{
-        tickSize: 5,
-        tickPadding: 35,
+        tickSize: 2,
+        tickPadding: 50,
         tickRotation: 0,
-        legend: 'جریان',
+        legend: 'نهاد',
         legendPosition: 'middle',
-        legendOffset: -65
+        legendOffset: -70
     }}
     colors={{
         type: 'diverging',
-        scheme: 'red_yellow_blue',
+        scheme: 'oranges',
         divergeAt: 0.5,
-        minValue: -200,
-        maxValue: 1000
+        minValue: min,
+        maxValue: max
     }}
     emptyColor="#555555"
     legends={[

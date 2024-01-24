@@ -1,17 +1,14 @@
-import { Col, Layout, Row } from 'antd';
+import {  Layout } from 'antd';
 import SideBar from '../components/SideBar';
 import HeaderItem from '../components/HeaderItem';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Cards from '../components/Cards';
-import { FaTelegramPlane } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+
 import { useDispatch} from 'react-redux';
-import { login } from '../slices/accountSlice';
+
 import { useGetEhsasTelegramNewsQuery } from '../query/Charts';
-import LineCharts from '../components/LineCharts';
-import { FaInstagram } from "react-icons/fa";
-import Map from '../components/Map';
+import { useLocation } from 'react-router-dom/dist';
+
 const { Header,  Content } = Layout;
 
 
@@ -21,10 +18,7 @@ function DashboardPage() {
   const {data , isLoading} = useGetEhsasTelegramNewsQuery('ehsasTelegram')
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('user') || "{}");
-  useEffect(()=>{
-  dispatch(login(user))
-  }, [user])
+  
 
 
  
@@ -34,7 +28,18 @@ function DashboardPage() {
    } 
 
   const [value , setValue] = useState(1)
-  
+
+  const path = useLocation()
+
+
+  useEffect(()=>{
+    if(path.pathname.split('/')[2]==''){
+      navigate('telegram')
+      console.log('adsadasdasdasd')
+      console.log(path.pathname.split('/')[2])
+    }
+  })
+ 
  
   return (
     <Layout>

@@ -1,0 +1,58 @@
+.container {
+    background-color: green;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link {
+    height: 70px;
+    width: 70px;
+    background-color: #caf7e3;
+    border-radius: 35px;
+    text-align: center;
+    margin: 7px;
+    line-height: 80px;
+}
+
+#target:hover {
+    transform: scale(1.5);
+}
+
+.icon:hover {
+    background-color: blue;
+} 
+
+
+a i {
+    transition: all 0.3s linear;
+}
+
+a:hover i {
+    transform: scale(1.5);
+}
+
+.youtube:hover {
+    color: red;
+}
+
+.facebook:hover {
+    color: blue;
+}
+
+.instagram:hover {
+    color: #e11d74;
+}
+
+.twitter:hover {
+    color: #00adb5;
+}
+
+.github:hover {
+    color: black;
+}
+
+.linkedin:hover {
+    color: #04009a;
+}

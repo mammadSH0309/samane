@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import { AppstoreOutlined, MailOutlined} from '@ant-design/icons';
+import React from 'react'
 import {Divider, Layout} from 'antd';
 import { ConfigProvider, Flex, Menu } from 'antd';
 import { IoHomeOutline } from "react-icons/io5";
-import { FaTelegramPlane } from "react-icons/fa";
-import { IoNewspaperOutline } from "react-icons/io5";
-import { FaXTwitter } from "react-icons/fa6";
-import { RiTelegramLine } from "react-icons/ri";
-import { NavLink } from 'react-router-dom'
-import { MdLiveTv } from "react-icons/md";
-import {Link , animateScroll , scroller } from 'react-scroll'
 
+import { IoNewspaperOutline } from "react-icons/io5";
+
+import { NavLink, useNavigate } from 'react-router-dom'
+import { MdLiveTv } from "react-icons/md";
+import {Link , animateScroll} from 'react-scroll'
+
+import namad from '../assets/images/namad.png'
 const { Sider } = Layout;
 function SideBar({collapsed , setCollapsed}) {
 
@@ -19,17 +18,7 @@ function SideBar({collapsed , setCollapsed}) {
     }
 
 
-    const handleItemClick = (p)=> {
-        if ( p === 'top') {
-            animateScroll.scrollToTop();
-
-        }else if (p === 'shayeat') {
-            animateScroll.scrollTo('shayeat')
-        }else if (p === 'afkar') {
-            animateScroll.scrollTo('afkar')
-        }
-    }
-
+const navigate = useNavigate()
 
 
 
@@ -42,16 +31,19 @@ function SideBar({collapsed , setCollapsed}) {
                 components : {
                     Menu : {
                         
-                        itemHoverBg : '#ffd666',                
-                        itemColor : '#F0A500',
-                        darkSubMenuItemBg : '#838786',
-                        backgroundColor : '#000000',
-                        horizontalItemSelectedColor : '#F0A500',
+                        itemHoverBg : '#4c71a1',                
+                        itemColor : '#4c71a1',
+                        darkSubMenuItemBg : 'white',
+                        backgroundColor : '#4c71a1',
+                        horizontalItemSelectedColor : '#4c71a1',
                         horizontalItemHoverColor : '#F0A500', 
+                        darkItemSelectedBg : '#4c71a1',
+                        itemSelectedBg : '#4c71a1',
                         margin : 2 , 
                         padding : 10,
                         zIndexBase:100,
-                        itemSelectedColor : "F0A500"
+                        itemSelectedColor : "#4c71a1", 
+                       
                         
                     }
                 }
@@ -61,32 +53,36 @@ function SideBar({collapsed , setCollapsed}) {
     breakpoint='md' 
     className='h-screen ' 
     theme='light'
-    style={{ position: 'sticky' , top : 0 ,  bottom : 0 , backgroundColor : 'black', height:'100vh'}}
+    style={{ position: 'sticky' , top : 0 ,  bottom : 0 , backgroundColor : '#41535a', height:'100vh'}}
     >
-      <Flex justify='center' align='center' className='h-32 w-full text-white'  >
+      <Flex justify='center' align='center' className='h-28 w-full text-white pt-5'  >
           <img className='h-32'
-          src="https://static.telewebion.com/channelsLogo/ZWE1OWZhYTEwODJhNjRlNDkzMmZhODM1MWU4NTEyN2FiMGM3NTk1MzFjY2I2ZTY0ZmMzNDQxZTMwNzc0NTI4Nw/default" 
+          src={namad}
           alt="" />
+         {/* <span className='font-khameneiiRegular text-xl'>سامانه اتاق وضعیت</span>  */}
       </Flex>
-      <Divider className='text-yellow-500 bg-yellow-400'/>
+      <Divider className='text-black'/>
       <Menu  
-        theme='dark'
-        style={{ backgroundColor : "black" }}
+        theme='light'
+       
         defaultActiveFirst={['/dashboard']}
-        activeKey=''
+        style={{backgroundColor :'#41535a'}}
         mode='inline'
         items={[
             {
-                label : <NavLink to={''} 
-                       
-                       >
-                           صفحه اصلی
-                       </NavLink>,
+                label : <NavLink  style={({isActivte}) =>{
+                    return {color : isActivte ? 'yellow' : 'white'}
+                }} to={'/dashboard/homepage'}>
+                    صفحه اصلی 
+                </NavLink>,
                 key : '/dashboard' , 
                 icon : <IoHomeOutline/>,   
-            },
+            }, 
             {
-             label : <NavLink to={'khabar'} 
+             label : <NavLink style={({isActivte}) =>{
+                return {color : isActivte ? 'red' : 'white'}
+            }} 
+            to={'/dashboard/khabar'} 
                     
                     >
                         لحظه نگار
@@ -97,7 +93,11 @@ function SideBar({collapsed , setCollapsed}) {
              
             },
             {
-                label : <NavLink to={'ostanNama'} 
+                label : <NavLink 
+                style={({isActivte}) =>{
+                    return {color : isActivte ? 'red' : 'white'}
+                }}
+                 to={'/dashboard/ostanNama'} 
                        
                        >
                         استان نما
@@ -108,56 +108,36 @@ function SideBar({collapsed , setCollapsed}) {
                 
             },
             {
-                label : <NavLink to={'rasad'} 
-                       
+                label : <NavLink 
+                style={({isActivte}) =>{
+                    return {color : isActivte ? 'red' : 'white'}
+                }}
+                to={'/dashboard/rasad'} 
+               
                        >
                         رصد نگار 
                        </NavLink>,
                 key : '/rasad' , 
                 icon : <IoNewspaperOutline/>,
-                children: [
-                    {
-                        label : <Link to={'revayat'}  onClick={()=> handleItemClick('top')}
-                               
-                               >
-                                روایت اول  
-                               </Link>,
-                        key : '/revayat' , 
-                        icon : <IoNewspaperOutline/>,
-                        
-                        
-                    },
-                    {
-                        label : <Link    to={'shayeat'} 
-                                 
-                               >
-                                    شایعات و اخبار جعلی
-                               </Link>,
-                        key : '/shayeat' , 
-                        icon : <IoNewspaperOutline/>,
-                        
-                        
-                    },
-                    {
-                        label : <Link   to={'afkar'}  
-                               
-                               >
-                                افکار سنجی   
-                               </Link>,
-                        key : '/afkar' , 
-                        icon : <IoNewspaperOutline/>,
-                        
-                        
-                    }
-                  
-                ]
                 
             },
            
-          
+            // {
+            //     label : <Link to={'/dashboard/rasad'}>رصدنگار</Link>,
+            //     key :'/rasad',
+            //     children : [
+            //         {
+            //             label :'روایت'
+            //         }
+            //     ]
+            // },
             
             {
-                label : <NavLink to={'cards'} 
+                label : <NavLink 
+                style={({isActivte}) =>{
+                    return {color : isActivte ? 'red' : 'white'}
+                }}
+                to={'cards'} 
                        
                        >
                         هوش نگار    
@@ -167,6 +147,7 @@ function SideBar({collapsed , setCollapsed}) {
                 
                 
             },
+            
 
             // {
             
@@ -215,3 +196,54 @@ export default SideBar
 
 
 
+
+
+
+// {
+//     label : <NavLink 
+    
+//     to={'/dashboard/rasad'} 
+   
+//            >
+//             رصد نگار 
+//            </NavLink>,
+//     key : '/rasad' , 
+//     icon : <IoNewspaperOutline/>,
+//     children: [
+//         {
+//             label : <Link to={'revayat'}  onClick={()=> handleItemClick('top')}
+           
+//                    >
+//                     روایت اول  
+//                    </Link>,
+//             key : '/revayat' , 
+//             icon : <IoNewspaperOutline/>,
+            
+            
+//         },
+//         {
+//             label : <Link    to={'shayeat'} 
+                     
+//                    >
+//                         شایعات و اخبار جعلی
+//                    </Link>,
+//             key : '/shayeat' , 
+//             icon : <IoNewspaperOutline/>,
+            
+            
+//         },
+//         {
+//             label : <Link   to={'afkar'}  
+                   
+//                    >
+//                     افکار سنجی   
+//                    </Link>,
+//             key : '/afkar' , 
+//             icon : <IoNewspaperOutline/>,
+            
+            
+//         }
+      
+//     ]
+    
+// },

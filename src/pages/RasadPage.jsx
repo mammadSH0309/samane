@@ -1,17 +1,16 @@
-import { Col, Divider, Image, Row } from 'antd'
+import { Col, Divider, Row } from 'antd'
 import React from 'react'
 import CardKhabar from '../components/CardKhabar'
 import BasteNama from '../components/BasteNama'
-import { useGetAfkarQuery, useGetBasteNamaQuery, useGetFakeNewsQuery, useGetMehvarNamaQuery, useGetRasadNamaQuery, useGetRevayatQuery } from '../query/Charts'
-import { Skeleton, id } from 'antd';
-import BasteDownload from '../components/BasteDownload'
-import MehvarNama from '../components/MehvarNama'
+import { useGetAfkarQuery, useGetBasteNamaQuery,useGetMehvarNamaQuery, useGetRasadNamaQuery, useGetRevayatQuery } from '../query/Charts'
+import { Skeleton} from 'antd';
+
 import CardT from '../components/CardT'
-import SwiperKhabar from '../components/SwiperKhabar'
+
 import BubbleChat from '../components/BubbleChat'
 import Accordion from '../components/Accordion'
 import AfkarSanji from '../components/AfkarSanji'
-import {Link , animateScroll , scroller } from 'react-scroll'
+
 
 function RasadPage() {
     // dataRasad
@@ -112,9 +111,9 @@ if(!loadingBaste && !loadingRasad && !loadingMehvar && !loadingAfkar)
       </Divider>
       </div>
 
-    <Col className='m-3 mt-3 h-auto  rounded-lg    py-2'>
+    <Col sm={5} lg={4} md={24} xl={24} className='m-3 mt-3 h-auto  rounded-lg    py-2'>
      <Row className='justify-items-center justify-center w-full gap-4 items-center text-center' >
-       <Col sm={5} lg={4} md={5} xl={4} >
+     
        {!loadingAfkar && successAfkar ? (dataAfkar.map((dataAfkar , index)=>(
             <AfkarSanji title={dataAfkar.title} des={dataAfkar.description} type={dataAfkar.type_packet} doc={dataAfkar.documents} img={dataAfkar.images}/>
           ))) : (<>
@@ -122,7 +121,7 @@ if(!loadingBaste && !loadingRasad && !loadingMehvar && !loadingAfkar)
           <Skeleton/>
           <Skeleton/>
           </>)}  
-        </Col>  
+     
            
     </Row>  
 

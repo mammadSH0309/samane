@@ -3,13 +3,22 @@ import LoginPage from "../pages/LoginPage";
 import App from "../App";
 import DashboardPage from "../pages/DashboardPage";
 import NotFound from "../components/NotFound";
-import TwiiterPage from "../pages/TwiiterPage";
+
 import TelegramPage from "../pages/TelegramPage";
 import KhabarPage from "../pages/KhabarPage";
 import OstanNamaPage from "../pages/OstanNamaPage";
 import MainPage from "../pages/MainPage";
 import RasadPage from "../pages/RasadPage";
 import Revayat from "../pages/Revayat";
+import TwitterPage from "../pages/TwitterPage";
+import LahzeNegarPage from "../pages/LahzeNegarPage";
+import HotNews from "../pages/HotNews";
+import LiveNews from "../pages/LiveNews";
+import PrivateNews from "../pages/PrivateNews";
+import InstagramPage from "../pages/InstagramPage";
+import BalePage from './../pages/BalePage';
+import RubikaPage from "../pages/RubikaPage";
+import EitaaPage from "../pages/EitaaPage";
 
 
 
@@ -34,12 +43,32 @@ export const router = createBrowserRouter([
                 children:[
                     {
                         path : 'twitter/' ,
-                        element : <TwiiterPage/>
+                        element : <TwitterPage/>
         
                     },
                     {
                         path : 'telegram/' ,
                         element : <TelegramPage/>
+        
+                    },
+                    {
+                        path : 'instagram/' ,
+                        element : <InstagramPage/>
+        
+                    },
+                    {
+                        path : 'bale/' ,
+                        element : <BalePage/>
+        
+                    },
+                    {
+                        path : 'rubika/' ,
+                        element : <RubikaPage/>
+        
+                    },
+                    {
+                        path : 'eitaa/' ,
+                        element : <EitaaPage/>
         
                     },
                 ]
@@ -51,6 +80,31 @@ export const router = createBrowserRouter([
                 
                 element : <OstanNamaPage/>,
                
+                  // and the action
+                  
+                
+            },
+            {
+                path : 'khabar/',
+                
+                element : <LahzeNegarPage/>,
+              children:[
+                    {
+                        path : 'hotnews/' ,
+                        element : <HotNews/>
+        
+                    },
+                    {
+                        path : 'livenews/' ,
+                        element : <LiveNews/>
+        
+                    },
+                    {
+                        path : 'privatenews/' ,
+                        element : <PrivateNews/>
+        
+                    }
+                ]
                   // and the action
                   
                 

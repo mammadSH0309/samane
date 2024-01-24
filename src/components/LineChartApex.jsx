@@ -74,6 +74,8 @@ function LineChartApex({data , params}) {
           },
           xaxis: {
             categories: data?.date_time,
+            offsetY: 45,
+            offsetX : -10
           }
         },
       

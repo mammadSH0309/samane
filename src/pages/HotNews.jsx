@@ -1,46 +1,29 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {Col} from 'antd'
 import { GrFormView } from "react-icons/gr";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { useLocation } from 'react-router-dom/dist';
+import KhabarHotTelegram from '../components/KhabarHotTelegram';
+import KhabarHotTwitter from '../components/KhabarHotTwitter';
+import { IoCopy } from 'react-icons/io5';
 function HotNews() {
+
+  const location = useLocation()
+  const {hot ,   online , privateData} = location.state
+  const navigate = useNavigate()
+
   return (
     <Col lg={24}>
-        <div className='  flex flex-row m-1 p-1 text-white bg-red-500 sticky top-0 font-bold  justify-center rounded-lg'>
+        <div onClick={()=> navigate(-1)} className='  flex flex-row m-1 p-1 text-white bg-red-500 sticky top-0 font-bold  justify-center rounded-lg'>
        
          اخبار داغ
         
         </div>
 
-        <div className='  m-1 border border-black bg-white  rounded-md '>
-            <div className='p-1 m-1 font-bold text-black'>
-            🔰 کانال در استان
-            </div>
-        <div className={`  m-2 p-2  animate duration-75 h-auto font-khameneiiRegular text-justify overflow-hidden text-black `}>
-            <div >
-         
-            </div>
-            <div>
-           
-            </div>
-        </div>
-        <div className='flex flex-row justify-between mx-2 my-2 items-center  '>
-          <div className=' p-1 font-bold flex flex-row items-top align-middle'>
-           <div >
-           <FaRegCalendarAlt fontSize={16} style={{marginLeft : 5 , marginTop : 2 , color : 'gray'}}/>
-           </div>
-          <div style={{marginTop : '2px' , color : 'gray'}}>
-          1400/01/01
-          </div>
-          </div>
-          <div className=' p-1 font-bold flex flex-row items-center '>
-          <GrFormView fontSize={25} style={{marginBottom : 3 , color : 'gray'}}/> 
-          <div style={{color : 'gray'}}>
-          12K
-          </div>   
-          </div>
-        </div>
-        </div>
+        <KhabarHotTelegram dataHotTelegram={hot.telegram_hot_news} icon={<IoCopy fontSize={16} style={{marginBottom : 3 ,  marginLeft:1, color : 'gray'}}/>} />
+        <KhabarHotTwitter dataHotTwitter={hot.twitter_hot_news}/>
+        
         </Col>
   )
 }
